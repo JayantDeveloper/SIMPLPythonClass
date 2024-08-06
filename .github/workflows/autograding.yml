@@ -16,5 +16,12 @@ jobs:
       with:
         java-version: '11'
 
+    - name: Download JUnit Platform Console Standalone
+      run: |
+        wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.7.0/junit-platform-console-standalone-1.7.0.jar
+        mv junit-platform-console-standalone-1.7.0.jar junit-platform-console-standalone.jar
+
     - name: Compile and Run Tests
-      run: javac -cp .:junit-platform-console-standalone-1.7.0.jar SumEvenNumbers.java TestSumEvenNumbers.java && java -jar junit-platform-console-standalone-1.7.0.jar --select-class=TestSumEvenNumbers
+      run: |
+        javac -cp .:junit-platform-console-standalone.jar SumEvenNumbers.java TestSumEvenNumbers.java
+        java -jar junit-platform-console-standalone.jar --select-class=TestSumEvenNumbers
